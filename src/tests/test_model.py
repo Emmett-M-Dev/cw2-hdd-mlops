@@ -26,7 +26,7 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 
 
 # Configuration
-DATA_PATH = "data/processed/cleaned_hdd_from_faulty.csv"
+DATA_PATH = "data/processed/hdd_balanced_dataset.csv"
 MODEL_PATH = "models/model_random_forest.pkl"
 FEATURE_COLUMNS = ['capacity_bytes', 'lifetime', 'model_encoded']
 TARGET_COLUMN = 'failure'

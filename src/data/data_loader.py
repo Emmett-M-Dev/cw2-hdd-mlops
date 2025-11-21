@@ -11,7 +11,7 @@ import pandas as pd
 
 # Configuration
 RAW_DATA_PATH = "data/raw/hard_drive_failure_data.csv"
-PROCESSED_DATA_PATH = "data/processed/cleaned_hdd_from_faulty.csv"
+PROCESSED_DATA_PATH = "data/processed/hdd_balanced_dataset.csv"
 FEATURE_COLUMNS = ['capacity_bytes', 'lifetime', 'model_encoded']
 TARGET_COLUMN = 'failure'
 

@@ -142,7 +142,7 @@ def main():
     print("="*60)
 
     # Load some test data
-    test_data_path = "data/processed/cleaned_hdd_from_faulty.csv"
+    test_data_path = "data/processed/hdd_balanced_dataset.csv"
     if os.path.exists(test_data_path):
         df = pd.read_csv(test_data_path)
         sample_data = df[FEATURE_COLUMNS].head(5)

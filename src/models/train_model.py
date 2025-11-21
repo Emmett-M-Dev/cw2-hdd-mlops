@@ -27,7 +27,7 @@ from sklearn.metrics import (
 # Configuration
 MLFLOW_TRACKING_URI = "http://127.0.0.1:8080"
 EXPERIMENT_NAME = "hdd_failure_prediction"
-DATA_PATH = "data/processed/cleaned_hdd_from_faulty.csv"
+DATA_PATH = "data/processed/hdd_balanced_dataset.csv"
 MODEL_SAVE_PATH = "models/"
 FEATURE_COLUMNS = ['capacity_bytes', 'lifetime', 'model_encoded']
 TARGET_COLUMN = 'failure'
