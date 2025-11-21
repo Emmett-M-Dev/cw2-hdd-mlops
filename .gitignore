@@ -23,3 +23,13 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Models (large files - optional, comment out if you want to track)
+# models/*.pkl
+
+# Reports figures (generated)
+# reports/figures/
