@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # HDD Failure Prediction Model Service
+  model-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hdd-predictor
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  # MLflow Tracking Server
+  mlflow:
+    image: python:3.11-slim
+    container_name: mlflow-server
+    working_dir: /mlflow
+    volumes:
+      - ./mlruns:/mlflow/mlruns
+    ports:
+      - "5000:5000"
+    command: >
+      bash -c "pip install mlflow && mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri file:///mlflow/mlruns"
+    restart: unless-stopped
