@@ -53,9 +53,6 @@ def prepare_data(df):
 def train_model(iteration, X_train, X_test, y_train, y_test):
     """Train model based on iteration number."""
 
-    # Enable MLFlow autologging
-    mlflow.autolog()
-
     with mlflow.start_run():
         print(f"\nTraining Iteration {iteration}...")
 
@@ -97,11 +94,11 @@ def train_model(iteration, X_train, X_test, y_train, y_test):
             'roc_auc': roc_auc_score(y_test, y_pred_proba)
         }
 
-        # Log metrics explicitly (in addition to autolog)
+        # Log metrics
         for name, value in metrics.items():
             mlflow.log_metric(name, value)
 
-        # Log model
+        # Log model (only once, no autolog to avoid conflicts)
         mlflow.sklearn.log_model(model, "model")
 
         # Print results
