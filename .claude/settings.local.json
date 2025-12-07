@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(c:/Users/Emmet/cw2-hdd-mlops/.venv/Scripts/python.exe:*)",
+      "Bash(nul)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker logs:*)",
+      "Bash(findstr:*)",
+      "Bash(curl:*)",
+      "Bash(docker exec:*)",
+      "Bash(dir:*)",
+      "Bash(find:*)",
+      "Bash(if not exist scripts mkdir scripts)",
+      "Bash(Remove-Item -Path \"nul\" -Force)",
+      "Bash(C:/Users/Emmet/anaconda3/Scripts/pip.exe install azureml-core azureml-mlflow azure-ai-ml)",
+      "Bash(C:/Users/Emmet/anaconda3/python.exe scripts/submit_azure_job.py --iteration 1)",
+      "Bash(C:/Users/Emmet/anaconda3/python.exe:*)",
+      "Bash(C:/Users/Emmet/anaconda3/Scripts/pip.exe install:*)",
+      "Bash(az extension add:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
