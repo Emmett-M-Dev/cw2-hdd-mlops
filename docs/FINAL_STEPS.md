@@ -2,25 +2,44 @@
 
 ## IMMEDIATE ACTIONS (Next 30 minutes)
 
-### Step 1: Serve Model Locally (10 mins)
+### Step 1: Fix Environment and Serve Model Locally (15 mins)
 
-Open a NEW terminal (keep current one for monitoring):
+**Issue Fixed**: MLflow serving failed due to sklearn version mismatch (model trained with 1.0.2, environment has 1.3.0) and missing waitress-serve.exe in PATH.
+
+**Solution**: Install waitress in Anaconda and add Scripts to PATH.
+
+Open a NEW terminal (PowerShell or CMD, keep current one for monitoring):
 
 ```bash
 # Navigate to project
 cd c:\Users\Emmet\cw2-hdd-mlops
 
-# Serve model v2 on port 5001
-mlflow models serve -m models/v2 -p 5001 --no-conda
+# Install/reinstall waitress in Anaconda to create waitress-serve.exe
+C:\Users\Emmet\anaconda3\Scripts\pip.exe install --force-reinstall --no-deps waitress
+
+# Serve model v2 on port 5001 (use full path with PATH set)
+$env:PATH = "C:\Users\Emmet\anaconda3\Scripts;$env:PATH"
+C:\Users\Emmet\anaconda3\python.exe -m mlflow models serve -m models/v2 -p 5001 --no-conda
+```
+
+**Alternative (if sklearn version error persists)**:
+Download and use model from local MLflow instead (same sklearn version):
+
+```bash
+# Find latest run ID from MLflow UI (http://127.0.0.1:5000)
+# Use local model (already at sklearn 1.3.0)
+$env:PATH = "C:\Users\Emmet\anaconda3\Scripts;$env:PATH"
+C:\Users\Emmet\anaconda3\python.exe -m mlflow models serve -m runs:/<run-id>/model -p 5001 --no-conda
 ```
 
 **Expected Output**:
 ```
-[INFO] Starting gunicorn...
-[INFO] Listening at: http://127.0.0.1:5001
+2025/12/07 13:07:13 INFO mlflow.pyfunc.backend: === Running command 'waitress-serve --host=127.0.0.1 --port=5001 --ident=mlflow mlflow.pyfunc.scoring_server.wsgi:app'
 ```
 
 **SCREENSHOT 1**: Capture this terminal window showing server running
+
+**Note**: Model v2 from Azure ML was trained with Python 3.8 + sklearn 1.0.2. Current environment is Python 3.11 + sklearn 1.3.0, causing pickle incompatibility. For coursework demonstration, use local MLflow run instead (same environment).
 
 ---
 

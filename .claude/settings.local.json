@@ -20,7 +20,18 @@
       "Bash(git pull:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(az ml job create:*)",
+      "Bash(git push:*)",
+      "Bash(where:*)",
+      "Bash(C:/Users/Emmet/anaconda3/Scripts/conda.exe list:*)",
+      "Bash(timeout:*)",
+      "Bash(C:/Users/Emmet/anaconda3/Scripts/pip.exe uninstall:*)",
+      "Bash(C:/Users/Emmet/anaconda3/Scripts/waitress-serve.exe --help)",
+      "Bash($env:PATH = \"C:\\Users\\Emmet\\anaconda3\\Scripts;$env:PATH\")",
+      "Bash(ping:*)",
+      "Bash(PATH=\"/c/Users/Emmet/anaconda3/Scripts:$PATH\" C:/Users/Emmet/anaconda3/python.exe -m mlflow:*)",
+      "Bash(PATH=\"/c/Users/Emmet/anaconda3/Scripts:$PATH\" C:/Users/Emmet/anaconda3/python.exe -m mlflow models serve:*)"
     ],
     "deny": [],
     "ask": []
