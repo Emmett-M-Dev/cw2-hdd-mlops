@@ -62,8 +62,11 @@ def main():
     )
 
     # Start MLflow run
-    mlflow.set_tracking_uri("file:///c:/Users/Emmet/cw2-hdd-mlops/mlruns")
-    mlflow.set_experiment("Default")
+    # Use Docker MLflow server on port 8080, fallback to local file storage
+    import os
+    mlflow_uri = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:8080")
+    mlflow.set_tracking_uri(mlflow_uri)
+    mlflow.set_experiment("hdd_failure_prediction")
 
     with mlflow.start_run(run_name="iteration_3_local_rf"):
         # Log parameters

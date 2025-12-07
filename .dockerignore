@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+.venv/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Data (large files)
+data/raw/
+notebooks/
+
+# Models (will mount as volume)
+models/
+
+# Azure
+.azureml/
+.amlignore
+config.json
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Tests
+.pytest_cache/
+htmlcov/
+.coverage
+
+# CI/CD
+.github/
+
+# Other
+nul
+*.log
