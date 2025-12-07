@@ -1,7 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 
 command: >-
-  pip install mlflow &&
   python src/model.py --iteration ${{inputs.iteration}}
 
 inputs:
