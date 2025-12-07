@@ -290,9 +290,32 @@ python scripts/register_models.py
 
 Verify in Azure ML Studio → Models → `hdd_failure_predictor` (v1 and v2)
 
-### Step 8: Deploy Model (Optional)
+### Step 8: Deploy Model
 
-**Via Azure ML Studio** (Easiest):
+**Current Deployment: Local MLflow Serving**
+
+After attempting Azure ML managed endpoints (which failed with HTTP 502 liveness probe issues), we implemented local MLflow model serving for reliable deployment:
+
+```bash
+# Serve model v2 locally
+mlflow models serve -m models/v2 -p 5001 --no-conda
+```
+
+Test the deployed model:
+
+```bash
+# Run test script
+python scripts/test_api.py
+```
+
+Expected output shows predictions for 3 risk levels:
+- Low Risk (new drive): Prediction = 0 (HEALTHY)
+- Medium Risk (mid-life): Prediction = 0 (HEALTHY)
+- High Risk (old drive): Prediction = 1 (FAILURE)
+
+**Alternative: Azure ML Managed Endpoint** (Optional)
+
+If attempting Azure ML deployment:
 
 1. Go to Models → `hdd_failure_predictor` → v2
 2. Click "Deploy" → "Real-time endpoint"
@@ -303,6 +326,8 @@ Verify in Azure ML Studio → Models → `hdd_failure_predictor` (v1 and v2)
    - Upload scoring script: `src/models/score_azure.py`
 4. Deploy (~10 mins)
 5. Test in Studio → Endpoints → Test tab
+
+**Note**: Azure ML MLflow auto-deployment has known liveness probe issues. For production, implement custom health check endpoint in score.py.
 
 ---
 
