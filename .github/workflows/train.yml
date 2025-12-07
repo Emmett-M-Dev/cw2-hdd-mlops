@@ -25,7 +25,7 @@ jobs:
       - name: Submit Iteration 1 (Logistic Regression)
         run: |
           az ml job create \
-            --file src/job.yaml \
+            --file job.yaml \
             --resource-group cw2-hdd-mlops \
             --workspace-name cw2-hdd-workspace \
             --set inputs.iteration=1
@@ -33,7 +33,7 @@ jobs:
       - name: Submit Iteration 2 (Random Forest)
         run: |
           az ml job create \
-            --file src/job.yaml \
+            --file job.yaml \
             --resource-group cw2-hdd-mlops \
             --workspace-name cw2-hdd-workspace \
             --set inputs.iteration=2
