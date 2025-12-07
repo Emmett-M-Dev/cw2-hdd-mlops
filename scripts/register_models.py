@@ -16,21 +16,21 @@ def register_models():
     print("="*70)
 
     # Connect to workspace
-    print("\n1️⃣ Connecting to Azure ML workspace...")
+    print("\n1 Connecting to Azure ML workspace...")
     ws = Workspace.from_config()
-    print(f"   ✅ Connected to: {ws.name}")
+    print(f"    Connected to: {ws.name}")
 
     # Get the experiment
-    print("\n2️⃣ Retrieving experiment runs...")
+    print("\n2 Retrieving experiment runs...")
     experiment = Experiment(ws, 'hdd_failure_prediction')
-    print(f"   ✅ Experiment: {experiment.name}")
+    print(f"    Experiment: {experiment.name}")
 
     # Get all runs
     runs = list(experiment.get_runs())
-    print(f"   ✅ Found {len(runs)} total runs")
+    print(f"    Found {len(runs)} total runs")
 
     # Filter for our iterations
-    print("\n3️⃣ Finding iteration runs...")
+    print("\n3 Finding iteration runs...")
     iteration_runs = {}
 
     for run in runs:
@@ -53,17 +53,17 @@ def register_models():
             # Keep the most recent run for each iteration
             if iteration not in iteration_runs or run.created_time > iteration_runs[iteration].created_time:
                 iteration_runs[iteration] = run
-                print(f"   ✅ Iteration {iteration}: Run {run.id[:8]}...")
+                print(f"    Iteration {iteration}: Run {run.id[:8]}...")
 
         except Exception as e:
             continue
 
     if len(iteration_runs) < 2:
-        print(f"\n⚠️ Warning: Only found {len(iteration_runs)} iteration(s)")
+        print(f"\n Warning: Only found {len(iteration_runs)} iteration(s)")
         print("   Please ensure both iterations have been run successfully")
 
     # Register models
-    print("\n4️⃣ Registering models...")
+    print("\n4 Registering models...")
     registered_models = []
 
     for iteration, run in sorted(iteration_runs.items()):
@@ -76,7 +76,7 @@ def register_models():
                 algorithm = "Random Forest"
                 description = "Random Forest improved model (Iteration 2)"
 
-            print(f"\n   📦 Registering Iteration {iteration}...")
+            print(f"\n    Registering Iteration {iteration}...")
             print(f"      Run ID: {run.id}")
             print(f"      Algorithm: {algorithm}")
 
@@ -99,11 +99,11 @@ def register_models():
             f1_score = metrics.get('f1_score', 0)
             roc_auc = metrics.get('roc_auc', 0)
 
-            print(f"      ✅ Registered as version {model.version}")
+            print(f"       Registered as version {model.version}")
             print(f"      Metrics:")
-            print(f"         • Accuracy: {accuracy:.4f}")
-            print(f"         • F1-Score: {f1_score:.4f}")
-            print(f"         • ROC-AUC: {roc_auc:.4f}")
+            print(f"          Accuracy: {accuracy:.4f}")
+            print(f"          F1-Score: {f1_score:.4f}")
+            print(f"          ROC-AUC: {roc_auc:.4f}")
 
             registered_models.append({
                 'iteration': iteration,
@@ -115,28 +115,28 @@ def register_models():
             })
 
         except Exception as e:
-            print(f"      ❌ Error registering iteration {iteration}: {str(e)}")
+            print(f"       Error registering iteration {iteration}: {str(e)}")
 
     # Summary
     print("\n" + "="*70)
-    print("✅ MODEL REGISTRATION COMPLETE!")
+    print(" MODEL REGISTRATION COMPLETE!")
     print("="*70)
 
     if registered_models:
-        print(f"\n📊 Registered Models Summary:")
+        print(f"\n Registered Models Summary:")
         print(f"\n{'Iter':<6}{'Version':<10}{'Algorithm':<25}{'Accuracy':<12}{'F1-Score':<12}{'ROC-AUC'}")
         print("-"*70)
         for m in registered_models:
             print(f"{m['iteration']:<6}{m['version']:<10}{m['algorithm']:<25}{m['accuracy']:<12.4f}{m['f1_score']:<12.4f}{m['roc_auc']:.4f}")
 
-        print(f"\n💡 Next Steps:")
-        print(f"   1. Go to Azure ML Studio → Models → hdd_failure_predictor")
+        print(f"\n Next Steps:")
+        print(f"   1. Go to Azure ML Studio  Models  hdd_failure_predictor")
         print(f"   2. Review and compare model versions")
         print(f"   3. Deploy the best model (likely Iteration 2)")
-        print(f"   4. Select model → Deploy → Real-time endpoint")
+        print(f"   4. Select model  Deploy  Real-time endpoint")
 
     else:
-        print("\n⚠️ No models were registered. Please check:")
+        print("\n No models were registered. Please check:")
         print("   1. Both training jobs completed successfully")
         print("   2. Models were saved in the runs")
         print("   3. Run names contain 'iteration' or algorithm names")
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     try:
         register_models()
     except Exception as e:
-        print(f"\n❌ ERROR: {str(e)}")
+        print(f"\n ERROR: {str(e)}")
         print("\nTroubleshooting:")
         print("   1. Ensure config.json exists in project root")
         print("   2. Verify training jobs completed successfully")
