@@ -33,3 +33,13 @@ mlflow.db
 
 # Reports figures (generated)
 # reports/figures/
+
+# Azure ML
+config.json
+.azureml/
+.amlignore
+
+# Windows device files
+nul
+
+
